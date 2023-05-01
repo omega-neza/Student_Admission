@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Admission form</title>
+    <style>
+      /* styles for the page */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-image:url('pic.jpg') ;
+        background-size: cover;
+        padding: 50px;
+        margin-top: 10px;
+      }
+      textarea{
+          width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #333;
+      }
+      ::placeholder {
+     color: black; /* Set the color */
+     opacity: 1; /* Set the opacity */
+}
+      select{
+        width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #333;
+      }
+      
+      form{
+      width: 15cm;
+      height: 33cm;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      align-content: center;
+      margin-left: 25%;
+      }
+      
+      h1 {
+        color: white;
+        text-align: center;
+        margin-top: 10px;
+      }
+     
+      input{
+       width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #333;
+      }
+      label {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        display: block;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+      button[type="submit"] {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+button[type="reset"] {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-top: 20px; 
+}
+
+      .error {
+        color: red;
+        font-size: 14px;
+      }
+      
+      input[type="file"] {
+  display: block;
+  margin: 10px 0;
+  padding: 5px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px #ccc;
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
+}
+
+
+input[type="file"] {
+  width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: #333;
+      
+}
+#languageDropdown {
+    position: absolute;
+    width: 100px;  
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+    padding: 5px;
+    border: none;
+    color: #333;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  #languageDropdown:hover {
+    background-color: #333;
+    color: white;
+  }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 data-translate="studentAdmissionForm">Student Admission Form</h1>
+
+      <form action="AdmissionformServlet" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="first-name" name="firstname"  required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="last-name" name="lastname"  required>
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required max="2005-01-01">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="">{{translate.selectGender}}</option>
+            <option value="male">{{translate.male}}</option>
+            <option value="female">{{translate.female}}</option>
+            <option value="other">{{translate.other}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phonenumber"  required pattern="[0-9]{10}">
+        </div>
+        <div class="form-group">
+          <label for="id">ID</label>
+          <input type="text" id="id" name="id" required pattern="[0-9]{5}">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email"  required>
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea id="address" name="address" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="diploma">Diploma</label>
+          <input type="file" id="pdf" accept=".pdf" name="pdf">
+        </div>
+        <div class="form-group">
+          <label for="image">Image</label>
+          <input type="file" id="image" name="image" accept=".jpg,.png">
+        </div>  
+        <div class="form-group">
+          <button type="submit" value="submit">Submit</button>
+          <button type="reset">Cancel</button>
+        </div>
+      </form>
+    </div>
+    <select id="languageDropdown">
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="es">Español</option>
+    </select>
+    <script>
+      const translate = {
+        en: {
+         studentAdmissionForm: 'Student Admission Form',  
+          firstName: 'First Name',
+          lastName: 'Last Name',
+          dob: 'Date of Birth',
+          gender: 'Gender',
+          selectGender: 'Select Gender',
+          male: 'Male',
+          female: 'Female',
+          other: 'Other',
+          address: 'Address',
+          phone: 'Phone Number',
+          id: 'ID',
+          email: 'Email',
+          diploma: 'Diploma',
+          image: 'Image',
+          submit: 'Submit',
+          cancel: 'Cancel'
+},
+fr: {
+ studentAdmissionForm: 'Formulaire d\'admission des étudiants',
+firstName: 'Prénom',
+lastName: 'Nom de famille',
+dob: 'Date de naissance',
+gender: 'Genre',
+selectGender: 'Sélectionner le genre',
+male: 'Homme',
+female: 'Femme',
+other: 'Autre',
+address: 'Adresse',
+phone: 'Numéro de téléphone',
+id: 'Identité',
+email: 'Email',
+diploma: 'Diplôme',
+image: 'Image',
+submit: 'Soumettre',
+cancel: 'Annuler'
+},
+es: {
+studentAdmissionForm: 'Formulario de admisión de estudiantes',
+firstName: 'Nombre de pila',
+lastName: 'Apellido',
+dob: 'Fecha de nacimiento',
+gender: 'Género',
+selectGender: 'Seleccionar género',
+male: 'Masculino',
+female: 'Hembra',
+other: 'Otro',
+address: 'Dirección',
+phone: 'Número de teléfono',
+id: 'Cédula',
+email: 'Email',
+diploma: 'Diploma',
+image: 'Imagen',
+submit: 'Enviar',
+cancel: 'Cancelar'
+}
+
+
+
+};
+const form = document.querySelector('form');
+  const languageDropdown = document.querySelector('#languageDropdown');
+      const heading = document.querySelector('h1[data-translate]');
+
+  function translateFormElements(lang) {
+  const formGroups = form.querySelectorAll('.form-group');
+  
+  formGroups.forEach(group => {
+    const label = group.querySelector('label');
+    const input = group.querySelector('input, textarea, select');
+
+    if (label) {
+      const labelText = translate[lang][label.getAttribute('for')];
+      label.textContent = labelText;
+    }
+
+    if (input) {
+      if (input.tagName === 'SELECT') {
+        const options = input.querySelectorAll('option');
+        options.forEach(option => {
+          const optionText = translate[lang][option.value];
+          option.textContent = optionText;
+        });
+      } 
+    }
+  });
+
+  const submitButton = form.querySelector('button[type="submit"]');
+  submitButton.textContent = translate[lang]['submit'];
+
+  const cancelButton = form.querySelector('button[type="reset"]');
+  cancelButton.textContent = translate[lang]['cancel'];
+ heading.textContent = translate[lang][heading.getAttribute('data-translate')];
+    }
+
+  languageDropdown.addEventListener('change', event => {
+    const lang = event.target.value;
+    translateFormElements(lang);
+  });
+
+  translateFormElements('en');
+  function validateForm() {
+          // Get all the form input elements
+          var firstName = document.getElementById("firstName").value;
+          var lastName = document.getElementById("lastName").value;
+          var dob = document.getElementById("dob").value;
+          var gender = document.querySelector('input[name="gender"]:checked').value;
+          var phone = document.getElementById("phone").value;
+          var id = document.getElementById("id").value;
+          var email = document.getElementById("email").value;
+          
+          var address = document.getElementById("address").value;
+      
+          // Validate the input values
+          if (firstName == "") {
+            alert("First name is required");
+            return false;
+          }
+          if (lastName == "") {
+            alert("Last name is required");
+            return false;
+          }
+          if (dob == "") {
+            alert("Date of birth is required");
+            return false;
+          }
+          if (!gender) {
+            alert("Gender is required");
+            return false;
+          }
+          if (phone == "") {
+            alert("Phone number is required");
+            return false;
+          }
+          if (isNaN(phone) || phone.length != 10) {
+            alert("Invalid phone number, should be 10 numbers only");
+            return false;
+          }
+          if (id == "") {
+            alert("ID is required");
+            return false;
+          }
+          if (isNaN(id) || id.length != 5) {
+            alert("Invalid ID, should be 5 numbers only");
+            return false;
+          }
+          if (email == "") {
+            alert("Email is required");
+            return false;
+          }
+          if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            alert("Invalid email address");
+            return false;
+          }
+          
+          if (address == "") {
+            alert("Address is required");
+            return false;
+          }
+      
+          // If all the input values are valid, submit the form
+          return true;
+        }
+      </script>
+  </body>
+</html>
